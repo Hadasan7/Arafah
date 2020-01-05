@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_setoran"
+        android:icon="@drawable/ic_restaurant"
+        android:title="setoran" />
+
+    <item
+        android:id="@+id/nav_hitung"
+        android:icon="@drawable/ic_history"
+        android:title="hitung" />
+
+    <item
+        android:id="@+id/nav_laporan"
+        android:icon="@drawable/ic_format_list_bulleted"
+        android:title="laporan" />
+
+    <item
+        android:id="@+id/nav_anggota"
+        android:icon="@drawable/ic_people"
+        android:title="anggota" />
+
+</menu>

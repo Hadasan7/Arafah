@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_5"
+    android:orientation="vertical"
+    tools:context=".HitungFragment">
+
+    <!-- Penyetor -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masukkan Penyetor"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/grey_40"
+            app:fontFamily="sans-serif-medium" />
+
+        <Button
+            android:id="@+id/btn_tambah_penyetor"
+            style="@style/EditText.Flat.Grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableEnd="@drawable/ic_unfold_more"
+            android:hint="Pilih Nama"
+            android:inputType="none"
+            android:minHeight="@dimen/spacing_xmlarge"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large" />
+
+        <!-- Data Setoran dan HPP -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Jenis Setoran dan HPP"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/grey_40"
+            app:fontFamily="sans-serif-medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="HPP : "
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/barang1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Setoran1" />
+
+                    <TextView
+                        android:id="@+id/tv_hpp_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Rp. 0" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/barang2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Setoran2" />
+
+                    <TextView
+                        android:id="@+id/tv_hpp_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Rp. 0" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/barang3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Setoran3" />
+
+                    <TextView
+                        android:id="@+id/tv_hpp_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Rp. 0" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Form Setoran -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Data Setoran"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/grey_40"
+            app:fontFamily="sans-serif-medium" />
+
+        <!-- Judul Tabel Hitung -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/spacing_mxlarge"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Titipan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jumlah"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sisa"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hasil"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Penyetor"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+        </LinearLayout>
+
+        <!-- Tabel Hitung -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/spacing_mxlarge"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/et_nama_setoran_1"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Setoran"
+                android:minHeight="@dimen/spacing_small"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/tv_jumlah_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <Button
+                android:id="@+id/btn_masukkan_sisa_1"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_down"
+                android:hint="0"
+                android:inputType="none" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/terjual1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Rp. 0"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/bayar_penyetor1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Rp. 0"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/spacing_mxlarge"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/et_nama_setoran_2"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Setoran"
+                android:minHeight="@dimen/spacing_small"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/tv_jumlah_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <Button
+                android:id="@+id/btn_masukkan_sisa_2"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_down"
+                android:hint="0"
+                android:inputType="none" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/terjual2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Rp. 0"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/bayar_penyetor2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Rp. 0"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/spacing_mxlarge"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/et_nama_setoran_3"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Setoran"
+                android:minHeight="@dimen/spacing_small"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/tv_jumlah_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <Button
+                android:id="@+id/btn_masukkan_sisa_3"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_down"
+                android:hint="0"
+                android:inputType="none" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/terjual3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Rp. 0"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/bayar_penyetor3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_round_bg_outline_hitung"
+                android:hint="Rp. 0"
+                android:textColor="@color/grey_40"
+                app:fontFamily="sans-serif-medium" />
+
+            <View
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/spacing_mxlarge"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL"
+                android:textColor="#000"
+                app:fontFamily="sans-serif-medium" />
+            <Button
+                android:id="@+id/btn_simpan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Simpan"
+                android:background="@color/colorPrimary"/>
+            <TextView
+                android:layout_margin="3dp"
+                android:id="@+id/total_laba"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Rp. 0"
+                android:textColor="#000"
+                app:fontFamily="sans-serif-medium" />
+            <TextView
+                android:id="@+id/total_bayar"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Rp. 0"
+                android:textColor="#000"
+                app:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
