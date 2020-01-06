@@ -175,12 +175,12 @@ public class HitungFragment extends Fragment {
                 validasi2 = false;
             } else {
                 sisa2 = generateDot(btn_masukkan_sisa_2.getText().toString());
-                validasi2=true;
+                validasi2 = true;
             }
         }
         if (ll3.getVisibility() == View.GONE) {
             sisa3 = 0;
-            validasi3=true;
+            validasi3 = true;
         } else {
             if (terjual3.getText().toString().isEmpty()) {
                 sisa3 = generateDot(tv_jumlah_3.getText().toString());
@@ -189,29 +189,29 @@ public class HitungFragment extends Fragment {
                 builder.setTitle("Isian Kurang");
                 builder.setMessage("Pilih Sisa Barang Ke-3");
                 builder.show();
-                validasi3=false;
+                validasi3 = false;
             } else {
                 sisa3 = generateDot(btn_masukkan_sisa_3.getText().toString());
-                validasi3=true;
+                validasi3 = true;
             }
         }
 //        Log.e("lapor: ", "\nNama:" + nama + "\nSisa1:" + sisa1 + "\nSisa2:" + sisa2 + "\nSisa3:" + sisa3);
-        if (validasi2&&validasi3){
-            laba=generateDot(total_laba.getText().toString());
-            bayar=generateDot(total_bayar.getText().toString());
-            Log.e( "lapor: ","Update"+laba+"+"+bayar );
+        if (validasi2 && validasi3) {
+            laba = generateDot(total_laba.getText().toString());
+            bayar = generateDot(total_bayar.getText().toString());
+            Log.e("lapor: ", "Update" + laba + "+" + bayar);
             int maxlaporan;
-            if (laporanList.size()==0){
-                maxlaporan=0;
-            }else {
-                maxlaporan=laporanList.get(laporanList.size()-1).getId()+1;
+            if (laporanList.size() == 0) {
+                maxlaporan = 0;
+            } else {
+                maxlaporan = laporanList.get(laporanList.size() - 1).getId() + 1;
             }
-            Laporan laporan=new Laporan();
+            Laporan laporan = new Laporan();
             laporan.setId(maxlaporan);
             laporan.setNama(nama);
             laporan.setLaba(laba);
             laporan.setBayar(bayar);
-            setoranModel.setor(nama,sisa1,sisa2,sisa3);
+            setoranModel.setor(nama, sisa1, sisa2, sisa3);
             laporanModel.insert(laporan);
             settext0();
             btn_tambah_penyetor.setText("");
@@ -375,8 +375,10 @@ public class HitungFragment extends Fragment {
 //        Log.e("generateDot1: ", s1);
         s2 = s1.replace(".", "");
 //        Log.e("generateDot2: ", s2);
-        int i = 0;
-        if (s2 != "") {
+        int i ;
+        if (s2.equals("")) {
+            i = 0;
+        } else {
             i = Integer.parseInt(s2);
         }
         return i;
