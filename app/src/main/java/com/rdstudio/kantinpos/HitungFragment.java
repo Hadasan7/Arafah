@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
@@ -368,7 +369,7 @@ public class HitungFragment extends Fragment {
         tv_hpp_3.setText("");
     }
 
-    int generateDot(String s) {
+    private int generateDot(@NonNull String s) {
         String s1, s2;
         Log.e("generateDot: ", s);
         s1 = s.replaceAll("Rp. ", "");
