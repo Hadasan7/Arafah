@@ -370,11 +370,11 @@ public class HitungFragment extends Fragment {
 
     int generateDot(String s) {
         String s1, s2;
-//        Log.e("generateDot: ", s);
+        Log.e("generateDot: ", s);
         s1 = s.replaceAll("Rp. ", "");
-//        Log.e("generateDot1: ", s1);
+        Log.e("generateDot1: ", s1);
         s2 = s1.replace(".", "");
-//        Log.e("generateDot2: ", s2);
+        Log.e("generateDot2: ", s2);
         int i ;
         if (s2.equals("")) {
             i = 0;
