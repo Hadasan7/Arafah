@@ -6,18 +6,15 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.rdstudio.kantinpos.dataroom.Laporan;
+import com.rdstudio.kantinpos.dataroom.Harian;
 
 import java.util.List;
 
 @Dao
-public interface LaporanDao {
+public interface HarianDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Laporan laporan);
+    void insert(Harian harian);
 
-    @Query("SELECT * from laporan ORDER BY id")
-    LiveData<List<Laporan>> getlaporan();
-
-    @Query("DELETE from laporan")
-    void deleteAll();
+    @Query("SELECT * from harian ORDER BY id")
+    LiveData<List<Harian>> getHarian();
 }

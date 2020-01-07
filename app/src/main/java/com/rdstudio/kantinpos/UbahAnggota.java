@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,21 +18,20 @@ import com.rdstudio.kantinpos.model.SetoranModel;
 import com.rdstudio.kantinpos.utils.Tools;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 public class UbahAnggota extends AppCompatActivity {
 
-    private View parent_view;
     EditText btn_nama_anggota_baru, et_nama_setoran_1, et_hpp_1, et_harga_jual_1;
     EditText et_nama_setoran_2, et_hpp_2, et_harga_jual_2;
     EditText et_nama_setoran_3, et_hpp_3, et_harga_jual_3;
     private SetoranModel setoranModel;
-    private Setoran setoran;
+    public Setoran setoran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubah_anggota);
-        parent_view = findViewById(R.id.parent_view);
         btn_nama_anggota_baru = findViewById(R.id.btn_nama_anggota_baru);
         et_nama_setoran_1 = findViewById(R.id.et_nama_setoran_1);
         et_hpp_1 = findViewById(R.id.et_hpp_1);
@@ -46,6 +45,7 @@ public class UbahAnggota extends AppCompatActivity {
         initToolbar();
         if (getIntent().getParcelableExtra("setoran") != null) {
             setoran = getIntent().getParcelableExtra("setoran");
+            assert setoran != null;
             if (!setoran.getNama().isEmpty()) {
                 btn_nama_anggota_baru.setText(setoran.getNama());
                 et_nama_setoran_1.setText(setoran.getBarang1());
@@ -70,9 +70,9 @@ public class UbahAnggota extends AppCompatActivity {
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close);
-        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Tools.setSystemBarColor(this);
         Tools.setSystemBarLight(this);
@@ -105,12 +105,27 @@ public class UbahAnggota extends AppCompatActivity {
 
     void insert() {
         if (et_nama_setoran_2.getText().toString().isEmpty() || et_hpp_2.getText().toString().isEmpty() || et_harga_jual_2.getText().toString().isEmpty()) {
-            setoranModel.update(btn_nama_anggota_baru.getText().toString(),et_nama_setoran_1.getText().toString(), Integer.parseInt(et_hpp_1.getText().toString()), Integer.parseInt(et_harga_jual_1.getText().toString()), "", 0, 0, "", 0, 0);
+            setoranModel.update(btn_nama_anggota_baru.getText().toString(),et_nama_setoran_1.getText().toString(), generateDot(et_hpp_1.getText().toString()), generateDot(et_harga_jual_1.getText().toString()), "", 0, 0, "", 0, 0);
         } else if (et_nama_setoran_3.getText().toString().isEmpty() || et_hpp_3.getText().toString().isEmpty() || et_harga_jual_3.getText().toString().isEmpty()) {
-            setoranModel.update(btn_nama_anggota_baru.getText().toString(),et_nama_setoran_1.getText().toString(), Integer.parseInt(et_hpp_1.getText().toString()), Integer.parseInt(et_harga_jual_1.getText().toString()), et_nama_setoran_2.getText().toString(), Integer.parseInt(et_hpp_2.getText().toString()), Integer.parseInt(et_harga_jual_2.getText().toString()), "", 0, 0);
+            setoranModel.update(btn_nama_anggota_baru.getText().toString(),et_nama_setoran_1.getText().toString(), generateDot(et_hpp_1.getText().toString()), generateDot(et_harga_jual_1.getText().toString()), et_nama_setoran_2.getText().toString(), generateDot(et_hpp_2.getText().toString()), generateDot(et_harga_jual_2.getText().toString()), "", 0, 0);
         } else {
-            setoranModel.update(btn_nama_anggota_baru.getText().toString(),et_nama_setoran_1.getText().toString(), Integer.parseInt(et_hpp_1.getText().toString()), Integer.parseInt(et_harga_jual_1.getText().toString()), et_nama_setoran_2.getText().toString(), Integer.parseInt(et_hpp_2.getText().toString()), Integer.parseInt(et_harga_jual_2.getText().toString()), et_nama_setoran_3.getText().toString(), Integer.parseInt(et_hpp_3.getText().toString()), Integer.parseInt(et_harga_jual_3.getText().toString()));
+            setoranModel.update(btn_nama_anggota_baru.getText().toString(),et_nama_setoran_1.getText().toString(), generateDot(et_hpp_1.getText().toString()), generateDot(et_harga_jual_1.getText().toString()), et_nama_setoran_2.getText().toString(), generateDot(et_hpp_2.getText().toString()), generateDot(et_harga_jual_2.getText().toString()), et_nama_setoran_3.getText().toString(), generateDot(et_hpp_3.getText().toString()), generateDot(et_harga_jual_3.getText().toString()));
         }
+    }
+    private int generateDot(@NonNull String s) {
+        String s1, s2;
+        Log.e("generateDot: ", s);
+        s1 = s.replaceAll("Rp. ", "");
+        Log.e("generateDot1: ", s1);
+        s2 = s1.replace(".", "");
+        Log.e("generateDot2: ", s2);
+        int i ;
+        if (s2.equals("")) {
+            i = 0;
+        } else {
+            i = Integer.parseInt(s2);
+        }
+        return i;
     }
 
 }

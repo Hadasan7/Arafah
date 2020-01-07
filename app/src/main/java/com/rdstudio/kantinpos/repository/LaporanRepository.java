@@ -22,10 +22,12 @@ public class LaporanRepository {
     }
 
     public void insert(final Laporan laporan){
-        LaporanDatabase.EXECUTOR_SERVICE.execute(() -> {
-            laporanDao.insert(laporan);
-        });
+        LaporanDatabase.EXECUTOR_SERVICE.execute(() -> laporanDao.insert(laporan));
     }
 
     public LiveData<List<Laporan>> getmAllLaporan(){return mAllLaporan;}
+
+    public void delete(){
+        LaporanDatabase.EXECUTOR_SERVICE.execute(() -> laporanDao.deleteAll());
+    }
 }

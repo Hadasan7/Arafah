@@ -24,11 +24,10 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ListViewHolder> {
 
-    private final LayoutInflater mInflater;
     private List<Setoran> mSetoran;
 
     public MainAdapter(Context context){
-        this.mInflater=LayoutInflater.from(context);
+        LayoutInflater mInflater = LayoutInflater.from(context);
     }
 
     @NonNull
@@ -86,7 +85,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ListViewHolder
         View lytExpandPenyetor;
         LinearLayout ll2,ll3;
 
-        public ListViewHolder(@NonNull View itemView) {
+        ListViewHolder(@NonNull View itemView) {
             super(itemView);
             lytExpandPenyetor = itemView.findViewById(R.id.lyt_expand_setoran);
             lytExpandPenyetor.setVisibility(View.GONE);
@@ -101,19 +100,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ListViewHolder
             btnHideDetail = itemView.findViewById(R.id.btn_hide_setoran);
             ll2=itemView.findViewById(R.id.ll2);
             ll3=itemView.findViewById(R.id.ll3);
-            btnHideDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    toggleSectionText(ibArrowDetail);
-                }
-            });
+            btnHideDetail.setOnClickListener(view -> toggleSectionText(ibArrowDetail));
 
-            ibArrowDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    toggleSectionText(ibArrowDetail);
-                }
-            });
+            ibArrowDetail.setOnClickListener(view -> toggleSectionText(ibArrowDetail));
 
 
             // nested scrollview
@@ -122,18 +111,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ListViewHolder
         private void toggleSectionText(View view) {
             boolean show = toggleArrow(view);
             if (show) {
-                ViewAnimation.expand(lytExpandPenyetor, new ViewAnimation.AnimListener() {
-                    @Override
-                    public void onFinish() {
-                        Tools.nestedScrollTo(nestedScrollView, lytExpandPenyetor);
-                    }
-                });
+                ViewAnimation.expand(lytExpandPenyetor, () -> Tools.nestedScrollTo(nestedScrollView, lytExpandPenyetor));
             } else {
                 ViewAnimation.collapse(lytExpandPenyetor);
             }
 
         }
-        public boolean toggleArrow(View view) {
+        boolean toggleArrow(View view) {
             if (view.getRotation() == 0) {
                 view.animate().setDuration(200).rotation(180);
                 return true;

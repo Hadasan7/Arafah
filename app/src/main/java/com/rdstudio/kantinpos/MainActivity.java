@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -83,33 +82,30 @@ public class MainActivity extends AppCompatActivity {
 
         // Bottom Menu
         bottomNav = findViewById(R.id.bottom_nav);
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        bottomNav.setOnNavigationItemSelectedListener(item -> {
+            FragmentManager fragmentManager1 = getSupportFragmentManager();
+            final FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();
 
-                if (item.getItemId() == R.id.nav_setoran) {
+            if (item.getItemId() == R.id.nav_setoran) {
 //                    Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                    SetoranFragment setoranFragment = new SetoranFragment();
-                    fragmentTransaction.add(R.id.frame_container, setoranFragment, SetoranFragment.class.getSimpleName());
-                } else if (item.getItemId() == R.id.nav_hitung) {
+                SetoranFragment setoranFragment1 = new SetoranFragment();
+                fragmentTransaction1.add(R.id.frame_container, setoranFragment1, SetoranFragment.class.getSimpleName());
+            } else if (item.getItemId() == R.id.nav_hitung) {
 //                    Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                    HitungFragment hitungFragment = new HitungFragment();
-                    fragmentTransaction.add(R.id.frame_container, hitungFragment, HitungFragment.class.getSimpleName());
-                } else if (item.getItemId() == R.id.nav_laporan) {
+                HitungFragment hitungFragment = new HitungFragment();
+                fragmentTransaction1.add(R.id.frame_container, hitungFragment, HitungFragment.class.getSimpleName());
+            } else if (item.getItemId() == R.id.nav_laporan) {
 //                    Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                    LaporanFragment laporanFragment = new LaporanFragment();
-                    fragmentTransaction.add(R.id.frame_container, laporanFragment, LaporanFragment.class.getSimpleName());
-                } else if (item.getItemId() == R.id.nav_anggota) {
+                LaporanFragment laporanFragment = new LaporanFragment();
+                fragmentTransaction1.add(R.id.frame_container, laporanFragment, LaporanFragment.class.getSimpleName());
+            } else if (item.getItemId() == R.id.nav_anggota) {
 //                    Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                    AnggotaFragment anggotaFragment = new AnggotaFragment();
-                    fragmentTransaction.add(R.id.frame_container, anggotaFragment, AnggotaFragment.class.getSimpleName());
-                }
-
-                fragmentTransaction.commit();
-                return true;
+                AnggotaFragment anggotaFragment = new AnggotaFragment();
+                fragmentTransaction1.add(R.id.frame_container, anggotaFragment, AnggotaFragment.class.getSimpleName());
             }
+
+            fragmentTransaction1.commit();
+            return true;
         });
 
     }
@@ -129,26 +125,11 @@ public class MainActivity extends AppCompatActivity {
 
         ((TextView) dialog.findViewById(R.id.tv_version)).setText(String.format("%s%s ", getResources().getString(R.string.version), BuildConfig.VERSION_NAME));
 
-        dialog.findViewById(R.id.btn_top_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        dialog.findViewById(R.id.btn_top_close).setOnClickListener(view -> dialog.dismiss());
 
-        dialog.findViewById(R.id.btn_bottom_dialog_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        dialog.findViewById(R.id.btn_bottom_dialog_close).setOnClickListener(view -> dialog.dismiss());
 
-        dialog.findViewById(R.id.tv_bottom_dialog_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        dialog.findViewById(R.id.tv_bottom_dialog_close).setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
         dialog.getWindow().setAttributes(layoutParams);

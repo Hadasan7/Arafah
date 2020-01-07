@@ -2,7 +2,6 @@ package com.rdstudio.kantinpos.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,15 +64,12 @@ public class SetoranAdapter extends RecyclerView.Adapter<SetoranAdapter.ListView
             }else {
                 holder.ll3.setVisibility(View.VISIBLE);
             }
-            holder.btnEditDataAnggota.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mInflater.getContext(), UbahAnggota.class);
-                    intent.putExtra("setoran", (Parcelable) setoran);
-                    // bawa data user yang mau di edit
-                    mInflater.getContext().startActivity(intent);
+            holder.btnEditDataAnggota.setOnClickListener(view -> {
+                Intent intent = new Intent(mInflater.getContext(), UbahAnggota.class);
+                intent.putExtra("setoran", setoran);
+                // bawa data user yang mau di edit
+                mInflater.getContext().startActivity(intent);
 
-                }
             });
             Log.e("onBindViewHolder: ", setoran.getNama());
         }
@@ -123,19 +119,9 @@ public class SetoranAdapter extends RecyclerView.Adapter<SetoranAdapter.ListView
             tv_harga_jual_3 = itemView.findViewById(R.id.tv_harga_jual_3);
             ll2=itemView.findViewById(R.id.ll2);
             ll3=itemView.findViewById(R.id.ll3);
-            btnHideDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    toggleSectionText(ibArrowDetail);
-                }
-            });
+            btnHideDetail.setOnClickListener(view -> toggleSectionText(ibArrowDetail));
 
-            ibArrowDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    toggleSectionText(ibArrowDetail);
-                }
-            });
+            ibArrowDetail.setOnClickListener(view -> toggleSectionText(ibArrowDetail));
 
 
             // nested scrollview
@@ -145,18 +131,13 @@ public class SetoranAdapter extends RecyclerView.Adapter<SetoranAdapter.ListView
         private void toggleSectionText(View view) {
             boolean show = toggleArrow(view);
             if (show) {
-                ViewAnimation.expand(lytExpandPenyetor, new ViewAnimation.AnimListener() {
-                    @Override
-                    public void onFinish() {
-                        Tools.nestedScrollTo(nestedScrollView, lytExpandPenyetor);
-                    }
-                });
+                ViewAnimation.expand(lytExpandPenyetor, () -> Tools.nestedScrollTo(nestedScrollView, lytExpandPenyetor));
             } else {
                 ViewAnimation.collapse(lytExpandPenyetor);
             }
 
         }
-        public boolean toggleArrow(View view) {
+        boolean toggleArrow(View view) {
             if (view.getRotation() == 0) {
                 view.animate().setDuration(200).rotation(180);
                 return true;

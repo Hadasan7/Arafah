@@ -20,9 +20,6 @@ import com.rdstudio.kantinpos.model.LaporanModel;
  */
 public class LaporanFragment extends Fragment {
 
-    private RecyclerView rv_laporan;
-    private LaporanModel laporanModel;
-
     public LaporanFragment() {
         // Required empty public constructor
     }
@@ -33,11 +30,11 @@ public class LaporanFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_laporan,container,false);
-        rv_laporan=view.findViewById(R.id.rv_laporan);
+        RecyclerView rv_laporan = view.findViewById(R.id.rv_laporan);
         final LaporanAdapter laporanAdapter=new LaporanAdapter(getContext());
         rv_laporan.setAdapter(laporanAdapter);
         rv_laporan.setLayoutManager(new LinearLayoutManager(getContext()));
-        laporanModel=new ViewModelProvider(this).get(LaporanModel.class);
+        LaporanModel laporanModel = new ViewModelProvider(this).get(LaporanModel.class);
         laporanModel.getmAllLaporan().observe(this,laporanAdapter::setLaporan);
         // Inflate the layout for this fragment
         return view;

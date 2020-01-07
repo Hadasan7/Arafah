@@ -1,9 +1,9 @@
 package com.rdstudio.kantinpos;
 
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,11 +12,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.rdstudio.kantinpos.dataroom.Setoran;
@@ -29,7 +29,6 @@ import java.util.Objects;
 
 public class TambahkanSetoran extends AppCompatActivity {
 
-    private View parent_view;
     private String[] array_penyetor;
     private SetoranModel setoranModel;
     List<Setoran> setoranList;
@@ -40,7 +39,6 @@ public class TambahkanSetoran extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambahkan_setoran);
-        parent_view = findViewById(R.id.parent_view);
         et_jenis_setoran_1 = findViewById(R.id.et_jenis_setoran_1);
         et_jenis_setoran_2 = findViewById(R.id.et_jenis_setoran_2);
         et_jenis_setoran_3 = findViewById(R.id.et_jenis_setoran_3);
@@ -50,16 +48,13 @@ public class TambahkanSetoran extends AppCompatActivity {
         ll2 = findViewById(R.id.ll2);
         ll3 = findViewById(R.id.ll3);
         setoranModel = new ViewModelProvider(this).get(SetoranModel.class);
-        setoranModel.getmAll().observe(this, new Observer<List<Setoran>>() {
-            @Override
-            public void onChanged(List<Setoran> setorans) {
-                String[] strings = new String[setorans.size()];
-                for (int i = 0; i < setorans.size(); i++) {
-                    strings[i] = setorans.get(i).getNama();
-                    if (i == setorans.size() - 1) {
-                        array_penyetor = strings;
-                        setoranList = setorans;
-                    }
+        setoranModel.getmAll().observe(this, setorans -> {
+            String[] strings = new String[setorans.size()];
+            for (int i = 0; i < setorans.size(); i++) {
+                strings[i] = setorans.get(i).getNama();
+                if (i == setorans.size() - 1) {
+                    array_penyetor = strings;
+                    setoranList = setorans;
                 }
             }
         });
@@ -76,7 +71,7 @@ public class TambahkanSetoran extends AppCompatActivity {
         Objects.requireNonNull(toolbar.getNavigationIcon())
                 .setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Tools.setSystemBarColor(this);
         Tools.setSystemBarLight(this);
@@ -152,13 +147,10 @@ public class TambahkanSetoran extends AppCompatActivity {
     private void initContent() {
 
         Button etTambahPenyetor = findViewById(R.id.btn_tambah_penyetor);
-        etTambahPenyetor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        etTambahPenyetor.setOnClickListener(view -> {
 
-                if (view.getId() == R.id.btn_tambah_penyetor) {
-                    initDialogTambahSetoran((AppCompatButton) view);
-                }
+            if (view.getId() == R.id.btn_tambah_penyetor) {
+                initDialogTambahSetoran((AppCompatButton) view);
             }
         });
 
@@ -167,46 +159,43 @@ public class TambahkanSetoran extends AppCompatActivity {
     private void initDialogTambahSetoran(final AppCompatButton btn) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
-        builder.setSingleChoiceItems(array_penyetor, 0, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                settext0();
-                btn.setTextColor(Color.BLACK);
-                btn.setText(array_penyetor[i]);
-                et_jenis_setoran_1.setText(setoranList.get(i).getBarang1().toString());
-                if (setoranList.get(i).getJumlah1() != 0) {
-                    et_jumlah_setoran_1.setText(MessageFormat.format("{0}", setoranList.get(i).getJumlah1()));
-                }
-                if (!(setoranList.get(i).getBarang2() == null)) {
-                    if (!(setoranList.get(i).getBarang2().isEmpty())) {
-                        ll2.setVisibility(View.VISIBLE);
-                        et_jenis_setoran_2.setText(setoranList.get(i).getBarang2().toString());
-                        if (setoranList.get(i).getJumlah2() != 0) {
-                            et_jumlah_setoran_2.setText(MessageFormat.format("{0}", setoranList.get(i).getJumlah2()));
-                        }
-                    } else {
-                        ll2.setVisibility(View.GONE);
+        builder.setSingleChoiceItems(array_penyetor, 0, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            settext0();
+            btn.setTextColor(Color.BLACK);
+            btn.setText(array_penyetor[i]);
+            et_jenis_setoran_1.setText(setoranList.get(i).getBarang1());
+            if (setoranList.get(i).getJumlah1() != 0) {
+                et_jumlah_setoran_1.setText(MessageFormat.format("{0}", setoranList.get(i).getJumlah1()));
+            }
+            if (!(setoranList.get(i).getBarang2() == null)) {
+                if (!(setoranList.get(i).getBarang2().isEmpty())) {
+                    ll2.setVisibility(View.VISIBLE);
+                    et_jenis_setoran_2.setText(setoranList.get(i).getBarang2());
+                    if (setoranList.get(i).getJumlah2() != 0) {
+                        et_jumlah_setoran_2.setText(MessageFormat.format("{0}", setoranList.get(i).getJumlah2()));
                     }
                 } else {
                     ll2.setVisibility(View.GONE);
                 }
-                if (!(setoranList.get(i).getBarang3() == null)) {
-                    if (!(setoranList.get(i).getBarang3().isEmpty())) {
-                        ll3.setVisibility(View.VISIBLE);
-                        et_jenis_setoran_3.setText(setoranList.get(i).getBarang3().toString());
-                        if (setoranList.get(i).getJumlah3() != 0) {
-                            et_jumlah_setoran_3.setText(MessageFormat.format("{0}", setoranList.get(i).getJumlah3()));
-                        }
-                    } else {
-                        ll3.setVisibility(View.GONE);
+            } else {
+                ll2.setVisibility(View.GONE);
+            }
+            if (!(setoranList.get(i).getBarang3() == null)) {
+                if (!(setoranList.get(i).getBarang3().isEmpty())) {
+                    ll3.setVisibility(View.VISIBLE);
+                    et_jenis_setoran_3.setText(setoranList.get(i).getBarang3());
+                    if (setoranList.get(i).getJumlah3() != 0) {
+                        et_jumlah_setoran_3.setText(MessageFormat.format("{0}", setoranList.get(i).getJumlah3()));
                     }
                 } else {
                     ll3.setVisibility(View.GONE);
                 }
-
-
+            } else {
+                ll3.setVisibility(View.GONE);
             }
+
+
         });
         builder.show();
     }
@@ -220,9 +209,19 @@ public class TambahkanSetoran extends AppCompatActivity {
         et_jenis_setoran_3.setText("");
     }
 
-    int generateDot(String s) {
-        int i = 0;
-        i = Integer.parseInt(s.replace(".", ""));
+    private int generateDot(@NonNull String s) {
+        String s1, s2;
+        Log.e("generateDot: ", s);
+        s1 = s.replaceAll("Rp. ", "");
+        Log.e("generateDot1: ", s1);
+        s2 = s1.replace(".", "");
+        Log.e("generateDot2: ", s2);
+        int i ;
+        if (s2.equals("")) {
+            i = 0;
+        } else {
+            i = Integer.parseInt(s2);
+        }
         return i;
     }
 

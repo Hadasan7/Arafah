@@ -1,12 +1,10 @@
 package com.rdstudio.kantinpos;
 
-import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,20 +16,19 @@ import com.rdstudio.kantinpos.dataroom.Setoran;
 import com.rdstudio.kantinpos.model.SetoranModel;
 import com.rdstudio.kantinpos.utils.Tools;
 
+import java.util.Objects;
+
 public class TambahkanAnggota extends AppCompatActivity {
 
-    private View parent_view;
     EditText btn_nama_anggota_baru, et_nama_setoran_1, et_hpp_1, et_harga_jual_1;
     EditText et_nama_setoran_2, et_hpp_2, et_harga_jual_2;
     EditText et_nama_setoran_3, et_hpp_3, et_harga_jual_3;
     private SetoranModel setoranModel;
-    private Setoran setoran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambahkan_anggota);
-        parent_view = findViewById(R.id.parent_view);
         btn_nama_anggota_baru = findViewById(R.id.btn_nama_anggota_baru);
         et_nama_setoran_1 = findViewById(R.id.et_nama_setoran_1);
         et_hpp_1 = findViewById(R.id.et_hpp_1);
@@ -50,9 +47,9 @@ public class TambahkanAnggota extends AppCompatActivity {
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close);
-        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
+        Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Tools.setSystemBarColor(this);
         Tools.setSystemBarLight(this);
@@ -81,28 +78,20 @@ public class TambahkanAnggota extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Data Tersimpan");
         builder.setMessage(R.string.confirm_anggota);
-        builder.setPositiveButton(R.string.ya, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                btn_nama_anggota_baru.setText("");
-                et_nama_setoran_1.setText("");
-                et_nama_setoran_2.setText("");
-                et_nama_setoran_3.setText("");
-                et_hpp_1.setText("");
-                et_hpp_2.setText("");
-                et_hpp_3.setText("");
-                et_harga_jual_1.setText("");
-                et_harga_jual_2.setText("");
-                et_harga_jual_3.setText("");
+        builder.setPositiveButton(R.string.ya, (dialogInterface, i) -> {
+            btn_nama_anggota_baru.setText("");
+            et_nama_setoran_1.setText("");
+            et_nama_setoran_2.setText("");
+            et_nama_setoran_3.setText("");
+            et_hpp_1.setText("");
+            et_hpp_2.setText("");
+            et_hpp_3.setText("");
+            et_harga_jual_1.setText("");
+            et_harga_jual_2.setText("");
+            et_harga_jual_3.setText("");
 //                Snackbar.make(parent_view, "Tambahkan anggota baru", Snackbar.LENGTH_SHORT).show();
-            }
         });
-        builder.setNegativeButton(R.string.tidak, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
-            }
-        });
+        builder.setNegativeButton(R.string.tidak, (dialogInterface, i) -> finish());
         builder.show();
     }
 

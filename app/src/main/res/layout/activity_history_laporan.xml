@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryLaporanActivity">
+    tools:context=".HistoryLaporanActivity"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +22,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="@android:color/white"
-                app:srcCompat="@drawable/ic_arrow_back" />
+                app:srcCompat="@drawable/ic_arrow_back"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="0dp"
@@ -30,11 +32,26 @@
                 android:gravity="center_vertical"
                 android:text="History Laporan"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_weight="1"
+        android:id="@+id/rv_harian"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="InefficientWeight" />
+    <Button
+        android:id="@+id/btn_tambah_harian"
+
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tambahkan Laporan Hari Ini"
+        tools:ignore="HardcodedText" />
 
 
 </LinearLayout>

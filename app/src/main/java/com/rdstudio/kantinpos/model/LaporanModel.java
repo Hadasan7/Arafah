@@ -23,4 +23,5 @@ public class LaporanModel extends AndroidViewModel {
     public void insert(Laporan laporan){repository.insert(laporan);}
 
     public LiveData<List<Laporan>> getmAllLaporan(){return mAllLaporan;}
+    public void delete(){repository.delete();}
 }
